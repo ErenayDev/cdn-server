@@ -1,0 +1,31 @@
+{
+  "name": "encore-ts-starter",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Encore Typescript Starter",
+  "license": "MPL-2.0",
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "dev": "DEBUG=encore:loadbalancer DEBUG_COLORS=true encore run"
+  },
+  "devDependencies": {
+    "@types/node": "24.5.2",
+    "typescript": "5.9.2",
+    "vitest": "3.2.4"
+  },
+  "dependencies": {
+    "@types/bun": "^1.2.23",
+    "@types/debug": "^4.1.12",
+    "@types/geoip-lite": "^1.4.4",
+    "@types/supports-color": "^10.0.0",
+    "bun": "^1.2.23",
+    "debug": "^4.4.3",
+    "encore.dev": "^1.50.0",
+    "geoip-lite": "^1.4.10",
+    "supports-color": "^10.2.2"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.13.0"
+  }
+}

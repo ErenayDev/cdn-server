@@ -1,0 +1,7 @@
+[build]
+compile = "tsc"
+
+[install]
+
+[build.resolve]
+alias = { "@" = "./src" }
