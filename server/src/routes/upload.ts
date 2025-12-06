@@ -4,7 +4,7 @@ import { StorageService } from "../services/storage";
 import { ImageService } from "../services/image";
 import { generateFileName, isImage } from "../utils/file";
 import { config } from "../config";
-import cdnCache from "../services/redis"; // Updated path
+import { redis } from "../";
 
 export const uploadRoutes = new Elysia({ prefix: "/upload" })
   .derive(validateApiKey)
@@ -42,7 +42,7 @@ export const uploadRoutes = new Elysia({ prefix: "/upload" })
       await StorageService.saveFile(filename, processedBuffer);
 
       const stats = await StorageService.getFileStats(filename);
-      cdnCache
+      redis
         .cacheAsset(filename, processedBuffer, finalMimeType, stats)
         .catch(console.error);
 
@@ -74,7 +74,7 @@ export const uploadRoutes = new Elysia({ prefix: "/upload" })
 
     await StorageService.deleteFile(filename);
 
-    await cdnCache.invalidate(filename);
+    await redis.invalidate(filename);
 
     return { success: true, message: "File deleted" };
   });

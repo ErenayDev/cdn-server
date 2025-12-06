@@ -15,17 +15,18 @@
     "vitest": "3.2.4"
   },
   "dependencies": {
-    "@types/bun": "^1.2.23",
+    "@types/bun": "^1.3.3",
     "@types/debug": "^4.1.12",
     "@types/geoip-lite": "^1.4.4",
     "@types/supports-color": "^10.0.0",
-    "bun": "^1.2.23",
+    "bun": "^1.3.3",
     "debug": "^4.4.3",
-    "encore.dev": "^1.50.0",
+    "encore.dev": "^1.52.3",
     "geoip-lite": "^1.4.10",
+    "lru-cache": "^11.2.4",
     "supports-color": "^10.2.2"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.13.0"
+    "@rollup/rollup-linux-x64-gnu": "^4.53.3"
   }
 }

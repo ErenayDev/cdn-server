@@ -2,13 +2,13 @@ import { Elysia } from "elysia";
 import { StorageService } from "../services/storage";
 import { getFilePath, getMimeType } from "../utils/file";
 import { setCacheHeaders } from "../middleware/cache";
-import cdnCache from "../services/redis";
+import { redis } from "../";
 
 export const cdnRoutes = new Elysia({ prefix: "/cdn" })
   .get("/:filename", async ({ params, set, request }) => {
     const { filename } = params;
 
-    const cachedAsset = await cdnCache.getAsset(filename);
+    const cachedAsset = await redis.getAsset(filename);
     if (cachedAsset) {
       const clientETag = request.headers.get("If-None-Match");
       if (clientETag === cachedAsset.etag) {
@@ -40,7 +40,7 @@ export const cdnRoutes = new Elysia({ prefix: "/cdn" })
     const file = Bun.file(filePath);
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    cdnCache.cacheAsset(filename, buffer, mimeType, stats).catch(console.error);
+    redis.cacheAsset(filename, buffer, mimeType, stats).catch(console.error);
 
     const etag = `"${Buffer.from(filename + stats.mtime).toString("base64")}"`;
     setCacheHeaders(set, mimeType, etag, stats.mtime.toISOString());
@@ -54,7 +54,7 @@ export const cdnRoutes = new Elysia({ prefix: "/cdn" })
   .head("/:filename", async ({ params, set, request }) => {
     const { filename } = params;
 
-    const cachedAsset = await cdnCache.getAsset(filename);
+    const cachedAsset = await redis.getAsset(filename);
     if (cachedAsset) {
       const clientETag = request.headers.get("If-None-Match");
       if (clientETag === cachedAsset.etag) {
