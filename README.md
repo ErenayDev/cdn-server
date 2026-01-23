@@ -1,6 +1,6 @@
 # CDN
 
-I didn't specified a special name for this repository. You can use this system for your systems.
+No specific name was chosen for this repository. You can integrate this system into your own infrastructure.
 
 ## What's Included
 Hmm. In `server` directory, the backend written in `Elysia.js` greets you. In there you can will edit the `.env.template` then rename it to `.env`. Also I tried to reduce the cognitive load by breaking the project down into files as much as possible. So you can develop this backend more as you can.
